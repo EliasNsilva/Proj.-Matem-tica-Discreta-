@@ -37,9 +37,11 @@ def mdc(x,y):#função para achar o MCD entre dois números, usando o algoritimo
         x = aux 
 
 
-def calcular_inverso(e,totiente_de_euler):
+def calcular_inverso(e,totiente_de_euler):#função para achar o inverso
     divisores = [0]
     contador = 0
+
+    #achando o inverso utilizando o algoritimo de Euclides
 
     if totiente_de_euler > e:
         aux = e
@@ -89,11 +91,11 @@ def desencriptar(inverso, chave1):
         n = ''
         while(1):
             if mensagem_encrip[i] == " ":
-                letra = pow(int(n), inverso)%chave1
-                if letra == 28:
+                letra = pow(int(n), inverso)%chave1#desencriptando
+                if letra == 28:#caso especial do espaço
                     des_encrip.write(' ')
                 else:
-                    des_encrip.write(chr(letra + 63))
+                    des_encrip.write(chr(letra + 63))#convertendo para string pela tabela ASCII e salvando no arquivo
                 break
             n = n + str(mensagem_encrip[i])
             i = i + 1
@@ -108,20 +110,20 @@ def encriptar(mensagem, chave_publi1, chave_publi2):
     i = 0
 
     open('Mensagem_Encriptada.txt', 'w')
-    arquivo = open('Mensagem_Encriptada.txt', 'a')
+    arquivo = open('Mensagem_Encriptada.txt', 'a')#atribuindo os dados do arquivo Mensagem_Encriptada.txt para uma variavel
     
     while(i < len(mensagem)):
 
-        if ord(mensagem[i]) == 32:
-            cript = 28
-        elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 97:
-            cript = ord(mensagem[i]) - 63
-        elif ord(mensagem[i]) > 96:
+        if ord(mensagem[i]) == 32:#função ord retorna a posição da tavela ASCII
+            cript = 28c#caso especial do caracter "espaço"
+        elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 97:#caso seja letra maiuscula
+            cript = ord(mensagem[i]) - 63#utilizando as posiçôes da tabala ASCII que fique no intervalo desejado(a=2, z=27)
+        elif ord(mensagem[i]) > 96:#caso seja letra minuscula
             cript = ord(mensagem[i]) - 95
 
-        cript = pow(cript,chave_publi2)%chave_publi1    
+        cript = pow(cript,chave_publi2)%chave_publi1 #encripitando a letra  
         
-        arquivo.write(str(cript))
+        arquivo.write(str(cript))#salvando no arquivo
         arquivo.write(' ')
 
         i = i + 1
@@ -141,6 +143,8 @@ while(1):
     if opcao == 1:
         print('Digite dois números primos:')
         
+        #lendo e verificando se os valores são primos
+
         primo1 = int(input())
         if e_primo(primo1) == 0:
             print('\nEsse número não é primo, tente novamente!')
@@ -153,13 +157,16 @@ while(1):
             print('_____________________________________\n')
             continue
 
+        #gerando o tontiente de euler e a chave 1    
         tontiente = (primo1 - 1) * (primo2 - 1)
         chave1 = primo1 * primo2
+
+        #lendo a chave 2
 
         print('\nDigite um número expoente que seja realativamente primo a', tontiente)
         chave2 = int(input())
 
-        if mdc(chave2, tontiente) == 0:
+        if mdc(chave2, tontiente) == 0:#verificando se ela é relativamente prima ao tontiente de euler 
             print('\nEsse número não é válido, tente novamente!')
             print('_____________________________________\n')
             continue
@@ -174,7 +181,7 @@ while(1):
         print('_____________________________________\n')
 
     
-    if opcao == 2:
+    elif opcao == 2:
         print('\nDigite mensagem que deseja encriptar, sem acentos e caracteres especiais:')
         mensagem = input()
         
@@ -182,14 +189,14 @@ while(1):
         chave_publi1 = int(input())
         chave_publi2 = int(input())
 
-        encriptar(mensagem, chave_publi1, chave_publi2)
+        encriptar(mensagem, chave_publi1, chave_publi2)#função para encriptar
         test()
         print('\nMensagem Encriptada com sucesso!\n')
         print('_____________________________________\n')
 
 
 
-    if opcao == 3:
+    elif opcao == 3:
         print('Digite p:')
         p = int(input())
         print('Digite q:')
@@ -199,13 +206,13 @@ while(1):
 
         tontiente = (p - 1) * (q - 1)
         chave1 = p*q
-        inverso = calcular_inverso(e,tontiente)
+        inverso = calcular_inverso(e,tontiente)#função para achar o inverso utilizado para desencriptar a mensagem
 
-        desencriptar(inverso, chave1)
+        desencriptar(inverso, chave1)#função para desencriptar
         print('\n')
         test() 
         print('Mensagem Desencriptada com sucesso!\n')
         print('_____________________________________\n')
 
-    if opcao == 0:
+    elif opcao == 0:
         break
