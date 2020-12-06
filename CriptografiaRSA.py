@@ -25,7 +25,7 @@ def e_primo(x):#função para descobrir se o número é primo ou não
             return 0   
         i = i + 1 
 
-def mdc(x,y):#função para achar o MCD entre dois números, usando o algoritimo de Euclides
+def mdc(x,y):#função para achar o MDC entre dois números, usando o algoritimo de Euclides
     while(1):
         if y == 1:#se y = 1 logo eles são primos entre si
             return 1
@@ -114,8 +114,8 @@ def encriptar(mensagem, chave_publi1, chave_publi2):
     
     while(i < len(mensagem)):
 
-        if ord(mensagem[i]) == 32:#função ord retorna a posição da tavela ASCII
-            cript = 28#caso especial do caracter "espaço"
+        if ord(mensagem[i]) == 32:#função ord retorna a posição da tabela ASCII
+            cript = 28#caso especial do caractere "espaço"
         elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 97:#caso seja letra maiuscula
             cript = ord(mensagem[i]) - 63#utilizando as posiçôes da tabala ASCII que fique no intervalo desejado(a=2, z=27)
         elif ord(mensagem[i]) > 96:#caso seja letra minuscula
