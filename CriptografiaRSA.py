@@ -1,6 +1,8 @@
 import math 
 import time
 
+
+#Funções para gerar a barra de progresso
 def progress_bar(done):
     print("\rProcessando: [{0:50s}] {1:.1f}%".format('#' * int(done * 50), done * 100),end='')
 
@@ -11,21 +13,23 @@ def test():
         time.sleep(1)
     print('\n')
 
-def e_primo(x):
+#########################################
+
+def e_primo(x):#função para descobrir se o número é primo ou não
     i = 2
 
     while(1):
-        if i > math.sqrt(x):
+        if i > math.sqrt(x):#Limitando até a raiz do número
             return 1  
-        if x % i == 0:
+        if x % i == 0:#verificando se existem divisores exatos
             return 0   
         i = i + 1 
 
-def mdc(x,y):
+def mdc(x,y):#função para achar o MCD entre dois números, usando o algoritimo de Euclides
     while(1):
-        if y == 1:
+        if y == 1:#se y = 1 logo eles são primos entre si
             return 1
-        if y == 0:
+        if y == 0:#caso y chegue a ser igual a zero não são primos entre si
             return 0
 
         aux = y
@@ -42,6 +46,8 @@ def calcular_inverso(e,totiente_de_euler):
         e = totiente_de_euler
         totiente_de_euler = aux
 
+    mod = e
+
     while totiente_de_euler > 0:
         divisores.append(int(e/totiente_de_euler))
 
@@ -51,10 +57,10 @@ def calcular_inverso(e,totiente_de_euler):
 
         contador += 1
 
+    verificar_negatividade = contador
     n_anterior = 0
     n_atual = 1
     contador -= 1
-    verificar_negatividade = contador
 
     while contador > -1:
         n_substituto = n_atual
@@ -64,16 +70,16 @@ def calcular_inverso(e,totiente_de_euler):
 
     if verificar_negatividade % 2 == 0:
         n_anterior = n_anterior * (-1)
+        n_anterior = mod + n_anterior
 
-    print('Inverso:', n_anterior)
     return n_anterior
 
 
 
 def desencriptar(inverso, chave1):
-    arquivo = open('Mensagem_Encriptada.txt', 'r')
-    mensagem_encrip = arquivo.read()
-    des_encrip = open('Mensagem_Desencriptada.txt', 'w')
+    arquivo = open('Mensagem_Encriptada.txt', 'r')#abrindo o arquivo Mensagem_Encriptada.txt 
+    mensagem_encrip = arquivo.read()#colocando os dados de Mensagem_Encriptada.txt em uma variavel
+    des_encrip = open('Mensagem_Desencriptada.txt', 'w')#criando ou limpando o arquivo Mensagem_Desencriptada.txt
     arquivo.close()
 
 
@@ -88,7 +94,7 @@ def desencriptar(inverso, chave1):
                     des_encrip.write(' ')
                 else:
                     des_encrip.write(chr(letra + 63))
-                    break
+                break
             n = n + str(mensagem_encrip[i])
             i = i + 1
         i = i +1
@@ -137,22 +143,25 @@ while(1):
         
         primo1 = int(input())
         if e_primo(primo1) == 0:
-            print('Esse número não é primo, tente novamente!')
+            print('\nEsse número não é primo, tente novamente!')
+            print('_____________________________________\n')
             continue
 
         primo2 = int(input())
         if e_primo(primo2) == 0:
-            print('Esse número não é primo, tente novamente!')
+            print('\nEsse número não é primo, tente novamente!')
+            print('_____________________________________\n')
             continue
 
         tontiente = (primo1 - 1) * (primo2 - 1)
         chave1 = primo1 * primo2
 
-        print('Digite um número expoente que seja realativamente primo a', tontiente)
+        print('\nDigite um número expoente que seja realativamente primo a', tontiente)
         chave2 = int(input())
 
         if mdc(chave2, tontiente) == 0:
-            print('Esse número não é válido, tente novamente!')
+            print('\nEsse número não é válido, tente novamente!')
+            print('_____________________________________\n')
             continue
         
         arquivo = open('Chave_Pública.txt', 'w')
@@ -160,14 +169,13 @@ while(1):
         arquivo.write('\n')
         arquivo.write(str(chave2))
         arquivo.close()
-        print('\n')
         test()
-        print('Chaves geradas com sucesso!\n')
+        print('\nChaves geradas com sucesso!\n')
         print('_____________________________________\n')
 
     
     if opcao == 2:
-        print('Digite mensagem que deseja encriptar, sem acentos e caracteres especiais:')
+        print('\nDigite mensagem que deseja encriptar, sem acentos e caracteres especiais:')
         mensagem = input()
         
         print('Digite as chaves públicas:')
@@ -175,9 +183,8 @@ while(1):
         chave_publi2 = int(input())
 
         encriptar(mensagem, chave_publi1, chave_publi2)
-        print('\n')
         test()
-        print('Mensagem Encriptada com sucesso!\n')
+        print('\nMensagem Encriptada com sucesso!\n')
         print('_____________________________________\n')
 
 
