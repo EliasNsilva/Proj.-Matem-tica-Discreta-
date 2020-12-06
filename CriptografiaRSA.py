@@ -1,5 +1,57 @@
 import math 
-import tqdm 
+
+
+def desencriptar(inverso, chave1):
+    arquivo = open('Mensagem_Encriptada.txt', 'r')
+    mensagem_encrip = arquivo.read()
+    des_encrip = open('Mensagem_Desencriptada.txt', 'w')
+    arquivo.close()
+
+
+    i = 0
+
+    while(i < len(mensagem_encrip)):
+        n = ''
+        while(1):
+            if mensagem_e[i] == ' ':
+                letra = pow(int(n), inverso)%chave1
+                if letra == 28:
+                    des_encrip.write(' ')
+                else:
+                    des_encrip.write(chr(letra + 63))
+                    break
+            n = n + str(mensagem_encrip)
+            i = i + 1
+        i = i +1
+
+    mensagem_encrip.close()
+    des_encrip.close()
+
+
+
+def encriptar(mensagem, chave_publi1, chave_publi2):
+    i = 0
+
+    arquivo = open('Mensagem_Encriptada.txt', 'w')
+    
+    while(i < len(mensagem)):
+
+        if ord(mensagem[i]) == 32:
+            cript = 28
+        elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 97:
+            cript = ord(mensagem[i]) - 63
+        elif ord(mensagem[i]) > 96:
+            cript = ord(mensagem[i]) - 95
+
+        cript = pow(cript,chave_publi2)%chave_publi1    
+        
+        arquivo.write(str(cript))
+        arquivo.write(' ')
+
+        i = i + 1
+
+    arquivo.close()
+
 
 def calcular_inverso(e,totiente_de_euler):
     divisores = [0]
@@ -95,4 +147,31 @@ while(1):
         arquivo.close
 
     
+    if opcao == 2:
+        print('Digite mensagem que deseja encriptar, sem acentos e caracteres especiais:')
+        mensagem = input()
+        
+        print('Digite as chaves públicas:')
+        chave_publi1 = int(input())
+        chave_publi2 = int(input())
+
+        encriptar(mensagem, chave_publi1, chave_publi2)
+
+
+    if opcao == 3:
+        print('Digite p:')
+        p = int(input())
+        print('Digite q:')
+        q = int(input())
+        print('Digite e:')
+        e = int(input())
+
+        tontiente = (p - 1) * (q - 1)
+        chave1 = p*q
+        inverso = calcular_inverso(e,tontiente)
+
+        desencriptar(inverso, chave1)  
+        print('Mensagem Desencriptada com sucesso!')  
+
+
     break
