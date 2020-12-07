@@ -7,7 +7,7 @@ def progress_bar(done):
     print("\rProcessando: [{0:50s}] {1:.1f}%".format('#' * int(done * 50), done * 100),end='')
 
 
-def test():
+def barra():
     for n in range(4):
         progress_bar(n/3)
         time.sleep(1)
@@ -176,7 +176,7 @@ while(1):
         arquivo.write('\n')
         arquivo.write(str(chave2))
         arquivo.close()
-        test()
+        barra()
         print('\nChaves geradas com sucesso!\n')
         print('_____________________________________\n')
 
