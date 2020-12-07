@@ -121,7 +121,7 @@ def encriptar(mensagem, chave_publi1, chave_publi2):
         elif ord(mensagem[i]) > 96:#caso seja letra minuscula
             cript = ord(mensagem[i]) - 95
 
-        cript = pow(cript,chave_publi2)%chave_publi1 #encripitando a letra  
+        cript = pow(cript,chave_publi2)%chave_publi1 #encriptando a letra  
         
         arquivo.write(str(cript))#salvando no arquivo
         arquivo.write(' ')
