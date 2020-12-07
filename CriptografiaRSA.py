@@ -210,7 +210,7 @@ while(1):
 
         desencriptar(inverso, chave1)#função para desencriptar
         print('\n')
-        test() 
+        barra() 
         print('Mensagem Desencriptada com sucesso!\n')
         print('_____________________________________\n')
 
