@@ -163,7 +163,7 @@ while(1):
 
         #lendo a chave 2
 
-        print('\nDigite um número expoente que seja realativamente primo a', tontiente)
+        print('\nDigite um número expoente que seja relativamente primo a', tontiente)
         chave2 = int(input())
 
         if mdc(chave2, tontiente) == 0:#verificando se ela é relativamente prima ao tontiente de euler 
