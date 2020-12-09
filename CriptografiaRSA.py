@@ -116,7 +116,7 @@ def encriptar(mensagem, chave_publi1, chave_publi2):
 
         if ord(mensagem[i]) == 32:#função ord retorna a posição da tabela ASCII
             cript = 28#caso especial do caractere "espaço"
-        elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 97:#caso seja letra maiuscula
+        elif ord(mensagem[i]) > 64 and ord(mensagem[i]) < 91:#caso seja letra maiuscula
             cript = ord(mensagem[i]) - 63#utilizando as posiçôes da tabala ASCII que fique no intervalo desejado(a=2, z=27)
         elif ord(mensagem[i]) > 96:#caso seja letra minuscula
             cript = ord(mensagem[i]) - 95
