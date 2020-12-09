@@ -190,7 +190,7 @@ while(1):
         chave_publi2 = int(input())
 
         encriptar(mensagem, chave_publi1, chave_publi2)#função para encriptar
-        test()
+        barra()
         print('\nMensagem Encriptada com sucesso!\n')
         print('_____________________________________\n')
 
